@@ -1,27 +1,57 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div class="container position-relative" id="root" ref="app">
+    Hi there!
+    <search-bar @termChange="onChange" />
+    <single-video :video="selectedVideo" />
+    <video-list :videos="videos" ref="video-list" :onVideoSelected="selectVideo" />
+  </div>
 </template>
 
+
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import HelloWorld from './components/HelloWorld.vue';
+import { defineComponent } from "vue";
+import SearchBar from "./components/SearchBar.vue";
+import { api } from "./api";
+import { Item, ApiResponse } from "./apiResponse";
+import VideoList from "./components/VideoList.vue";
+import SingleVideo from "./components/SingleVideo.vue";
 
-@Options({
-  components: {
-    HelloWorld,
-  },
-})
-export default class App extends Vue {}
-</script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+interface Data {
+  videos: Item[] | undefined,
+  selectedVideo: Item | undefined
 }
-</style>
+
+export default defineComponent({
+  name: "app",
+  components: {
+    SearchBar,
+    VideoList,
+    SingleVideo,
+  },
+  data(): Data {
+    return {
+      videos: undefined,
+      selectedVideo: undefined
+    };
+  },
+  methods: {
+    async onChange(value: string) {
+      const res = await api.get<ApiResponse>("search", {
+        params: {
+          q: value,
+        },
+      });
+      this.videos = res.data.items;
+      this.selectVideo(res.data.items[0])
+    },
+    selectVideo(video: Item) {
+      this.selectedVideo = video
+    }
+  },
+  provide() {
+    return {
+      selectVideo: this.selectVideo
+    }
+  }
+});
+</script>
