@@ -19,7 +19,7 @@ import {
   DefineComponent,
 } from "vue";
 import VideoList from "./VideoList.vue";
-import { VideoItem } from "../apiResponse";
+import { VideoItem } from "../api/apiResponse";
 export default defineComponent({
   data() {
     return {

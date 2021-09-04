@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { VideoItem } from "../apiResponse"
+import { VideoItem } from "../api/apiResponse"
 import VideoListItem from "./VideoListItem.vue"
 export default defineComponent({
   props: {

@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { VideoItem } from "../apiResponse"
+import { VideoItem } from "../api/apiResponse"
 export default defineComponent({
   props: {
     video: Object as PropType<VideoItem>,

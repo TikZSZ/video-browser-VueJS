@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {KEY} from "../env"
+import {KEY} from "../../env"
 
 export const api = axios.create({
   baseURL:'https://www.googleapis.com/youtube/v3',

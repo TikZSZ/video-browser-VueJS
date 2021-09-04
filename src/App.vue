@@ -47,8 +47,8 @@ export default defineComponent({
 
 <script lang="ts" setup>
 import { defineComponent } from "vue";
-import { api } from "./api";
-import { VideoItem, YouTubeApiResponse } from "./apiResponse";
+import { api } from "./api/api";
+import { VideoItem, YouTubeApiResponse } from "./api/apiResponse";
 import VideoList from "./components/VideoList.vue";
 import SingleVideo from "./components/SingleVideo.vue";
 import SearchBar from "./components/SearchBar.vue";
