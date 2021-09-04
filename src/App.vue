@@ -1,27 +1,38 @@
 <template>
   <div class="container position-relative">
     Hi there!
-    <SearchBar @termChange="onChange"></SearchBar>
-    <SingleVideo :video="selectedVideo"></SingleVideo>
-    <VideoList :videos="videos" ref="video-list" :onVideoSelected="selectVideo"></VideoList>
+    <SearchBar @termChange="onChange" />
+    <SingleVideo v-if="selectedVideo" :video="selectedVideo" />
+    <VideoList v-if="videos" :videos="videos" :onVideoSelected="selectVideo" ref="video-list" />
   </div>
 </template>
 
 
-
 <script lang="ts">
+import { defineComponent } from "vue";
+import { api } from "./api/api";
+import { VideoItem, YouTubeApiResponse } from "./api/apiResponse";
+import VideoList from "./components/VideoList.vue";
+import SingleVideo from "./components/SingleVideo.vue";
+import SearchBar from "./components/SearchBar.vue";
+
 interface Data {
-  videos: VideoItem[] | undefined,
-  selectedVideo: VideoItem | undefined
+  videos: VideoItem[] | null,
+  selectedVideo: VideoItem | null
 }
 
 export default defineComponent({
   name: "app",
   data(): Data {
     return {
-      videos: undefined,
-      selectedVideo: undefined
+      videos: null,
+      selectedVideo: null
     };
+  },
+  components: {
+    VideoList,
+    SingleVideo,
+    SearchBar
   },
   methods: {
     async onChange(value: string) {
@@ -44,12 +55,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<script lang="ts" setup>
-import { defineComponent } from "vue";
-import { api } from "./api/api";
-import { VideoItem, YouTubeApiResponse } from "./api/apiResponse";
-import VideoList from "./components/VideoList.vue";
-import SingleVideo from "./components/SingleVideo.vue";
-import SearchBar from "./components/SearchBar.vue";
-</script> 

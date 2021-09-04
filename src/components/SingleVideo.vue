@@ -1,5 +1,5 @@
 <template>
-  <div class="position-absolute" v-if="video">
+  <div class="position-absolute">
     <iframe
       id="i"
       :width="width"
@@ -28,7 +28,10 @@ export default defineComponent({
     }
   },
   props: {
-    video: Object as PropType<VideoItem>,
+    video: {
+      type:Object as PropType<VideoItem>,
+      required:true
+    },
   },
   methods: {
     adjust() {
@@ -49,7 +52,7 @@ export default defineComponent({
   destroyed() {
     window.removeEventListener('resize', this.adjust)
   },
-  updated() {
+  mounted(){
     this.adjust()
   }
 });

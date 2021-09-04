@@ -1,5 +1,5 @@
 <template>
-  <div class="card text-right pe-auto" v-if="video" style="margin-bottom:40px;width: 18rem;">
+  <div class="card text-right pe-auto"  style="margin-bottom:40px;width: 18rem;">
     <div class="card-body" @click="onVideoSelect">
       <img class="card-img-top" :src="video.snippet.thumbnails.high.url" alt />
       <h3 class="card-title">{{ video.snippet.title }}</h3>
@@ -14,7 +14,10 @@ import { defineComponent, PropType } from 'vue'
 import { VideoItem } from "../api/apiResponse"
 export default defineComponent({
   props: {
-    video: Object as PropType<VideoItem>,
+    video:{
+      type: Object as PropType<VideoItem>,
+      required:true,
+    },
   },
   inject: ['selectVideo'],
   emits:{
