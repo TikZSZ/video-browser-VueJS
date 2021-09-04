@@ -1,4 +1,4 @@
-export interface Item{
+export interface VideoItem{
   "kind": string,
   "etag": string,
   "id": {
@@ -33,6 +33,6 @@ export interface Item{
   }
 }
 
-export interface ApiResponse{
-  items:Item[]
+export interface YouTubeApiResponse{
+  items:VideoItem[]
 }

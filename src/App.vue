@@ -1,33 +1,22 @@
 <template>
-  <div class="container position-relative" id="root" ref="app">
+  <div class="container position-relative">
     Hi there!
-    <search-bar @termChange="onChange" />
-    <single-video :video="selectedVideo" />
-    <video-list :videos="videos" ref="video-list" :onVideoSelected="selectVideo" />
+    <SearchBar @termChange="onChange"></SearchBar>
+    <SingleVideo :video="selectedVideo"></SingleVideo>
+    <VideoList :videos="videos" ref="video-list" :onVideoSelected="selectVideo"></VideoList>
   </div>
 </template>
 
 
-<script lang="ts">
-import { defineComponent } from "vue";
-import SearchBar from "./components/SearchBar.vue";
-import { api } from "./api";
-import { Item, ApiResponse } from "./apiResponse";
-import VideoList from "./components/VideoList.vue";
-import SingleVideo from "./components/SingleVideo.vue";
 
+<script lang="ts">
 interface Data {
-  videos: Item[] | undefined,
-  selectedVideo: Item | undefined
+  videos: VideoItem[] | undefined,
+  selectedVideo: VideoItem | undefined
 }
 
 export default defineComponent({
   name: "app",
-  components: {
-    SearchBar,
-    VideoList,
-    SingleVideo,
-  },
   data(): Data {
     return {
       videos: undefined,
@@ -36,7 +25,7 @@ export default defineComponent({
   },
   methods: {
     async onChange(value: string) {
-      const res = await api.get<ApiResponse>("search", {
+      const res = await api.get<YouTubeApiResponse>("search", {
         params: {
           q: value,
         },
@@ -44,7 +33,7 @@ export default defineComponent({
       this.videos = res.data.items;
       this.selectVideo(res.data.items[0])
     },
-    selectVideo(video: Item) {
+    selectVideo(video: VideoItem) {
       this.selectedVideo = video
     }
   },
@@ -52,6 +41,15 @@ export default defineComponent({
     return {
       selectVideo: this.selectVideo
     }
-  }
+  },
 });
 </script>
+
+<script lang="ts" setup>
+import { defineComponent } from "vue";
+import { api } from "./api";
+import { VideoItem, YouTubeApiResponse } from "./apiResponse";
+import VideoList from "./components/VideoList.vue";
+import SingleVideo from "./components/SingleVideo.vue";
+import SearchBar from "./components/SearchBar.vue";
+</script> 

@@ -13,12 +13,12 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { Item } from "../apiResponse"
+import { VideoItem } from "../apiResponse"
 import VideoListItem from "./VideoListItem.vue"
 export default defineComponent({
   props: {
-    videos: Object as PropType<Item[]>,
-    onVideoSelected:Function as PropType<(video:Item)=>void>
+    videos: Object as PropType<VideoItem[]>,
+    onVideoSelected:Function as PropType<(video:VideoItem)=>void>
   },
   components: {
     VideoListItem

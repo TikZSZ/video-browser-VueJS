@@ -11,14 +11,14 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { Item } from "../apiResponse"
+import { VideoItem } from "../apiResponse"
 export default defineComponent({
   props: {
-    video: Object as PropType<Item>,
+    video: Object as PropType<VideoItem>,
   },
   inject: ['selectVideo'],
   emits:{
-    onVideoSelected:(video:Item)=>{
+    onVideoSelected:(video:VideoItem)=>{
       return !!video
     }
   },

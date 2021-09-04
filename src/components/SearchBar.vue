@@ -9,7 +9,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import App from '../App.vue'
 export default defineComponent({
   name: "SearchBar",
   data() {
@@ -17,14 +16,9 @@ export default defineComponent({
   },
   emits:{
     termChange:(term:string)=>{
-      return term!==''
+      return !!term
     }
   },
-  methods:{
-    k(){
-      
-    }
-  }
 });
 </script>
 

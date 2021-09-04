@@ -19,7 +19,7 @@ import {
   DefineComponent,
 } from "vue";
 import VideoList from "./VideoList.vue";
-import { Item } from "../apiResponse";
+import { VideoItem } from "../apiResponse";
 export default defineComponent({
   data() {
     return {
@@ -28,7 +28,7 @@ export default defineComponent({
     }
   },
   props: {
-    video: Object as PropType<Item>,
+    video: Object as PropType<VideoItem>,
   },
   methods: {
     adjust() {
